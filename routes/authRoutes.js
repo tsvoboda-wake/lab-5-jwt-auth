@@ -29,11 +29,7 @@ router.post('/api/auth/register', (req, res) => {
 
   const token = jwt.sign({ id: newUser.id }, JWT_SECRET, { expiresIn: '1h' });
 
-  res.status(201).json({ message: 'User registered successfully', user: {
-    id: newUser.id,
-    name: newUser.name,
-    email: newUser.email
-  }, token: `Bearer ${token}` });
+  res.status(201).json({ message: 'User registered successfully', user: newUser, token: `Bearer ${token}` });
 });
 
 /**
@@ -63,11 +59,7 @@ router.post('/api/auth/login', (req, res) => {
 
     const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '1h' });
 
-    res.status(200).json({ message: 'Login successful', user: {
-      id: user.id,
-      name: user.name,
-      email: user.email
-    }, token: `Bearer ${token}` });
+    res.status(200).json({ message: 'Login successful', user, token: `Bearer ${token}` });
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Internal server error' }); 

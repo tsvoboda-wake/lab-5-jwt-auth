@@ -10,7 +10,6 @@ const authMiddleware = require('../middleware/authMiddleware');
 const router = express.Router();
 
 router.get('/api/protected/profile', authMiddleware, (req, res) => {
-  console.log('Testing profile req', req.user);
   try {
   res.status(200).json({ message: 'Profile information retrieved successfully', user: req.user });
   } catch (error) {
